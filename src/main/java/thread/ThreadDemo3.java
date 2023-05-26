@@ -2,6 +2,7 @@ package thread;
 
 /**
  * Thread example implementing Runnable interface using anonymous inner class and lambda expressions.
+ * join() and isAlive() example.
  */
 
 
@@ -17,6 +18,7 @@ public class ThreadDemo3 {
                 }
             }
         });
+
         Thread t2 = new Thread(() -> {
             for (int i = 0; i < 5; i++) {
                 System.out.println("Thread2");
@@ -27,6 +29,7 @@ public class ThreadDemo3 {
                 }
             }
         });
+
         t1.start();
         try {
             Thread.sleep(10);
@@ -34,5 +37,21 @@ public class ThreadDemo3 {
             throw new RuntimeException(e);
         }
         t2.start();
+
+        System.out.println("This statement will print before t1 and t2 complete");
+        System.out.println("t1.isAlive(): " + t1.isAlive());
+        System.out.println("t2.isAlive(): " + t2.isAlive());
+
+        try {
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        // join will wait main thread to be execute the below statements after both thread complete.
+
+        System.out.println("This statement will print after t1 and t2 complete");
+        System.out.println("t1.isAlive(): " + t1.isAlive());
+        System.out.println("t2.isAlive(): " + t2.isAlive());
     }
 }
