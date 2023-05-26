@@ -1,9 +1,9 @@
-package stream2;
+package stream;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Main {
+public class AllStreamMethod {
 
     public static void main(String[] args) {
         List<Person> people = getPeople();
